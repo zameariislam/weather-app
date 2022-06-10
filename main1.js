@@ -29,9 +29,12 @@ input.addEventListener('keyup', function (e) {
             // console.log(data.main.humidity)
             city.innerText = `${data.name} ,${data.sys.country}`
 
-
-
-            cardGenerator(children[0], data.main.temp, 'C', 'Temperature', icon)
+            children[0].innerHTML = `
+                <img width='50' src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="">
+                <p>${data.main.temp} C</p>
+                <p>Temperature</p>
+               
+                `
             cardGenerator(children[1], data.wind.speed, 'km/h', 'Wind')
             cardGenerator(children[2], data.main.humidity, '%', 'Humidity')
             cardGenerator(children[3], data.main.pressure, 'hPa', 'Humidity')
@@ -41,26 +44,11 @@ input.addEventListener('keyup', function (e) {
 });
 
 
-let cardGenerator = (element, data, unit, text, icon) => {
-    if (icon) {
-
-        element.innerHTML = `
-        <img width='50' src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="">
-        <p>${data} C</p>
-        <p>Temperature</p>
-
-        `
-    }
-    else {
-        element.children[1].style.display = 'none'
-        element.children[2].style.display = 'none'
-        element.children[3].innerText = `${data} ${unit}`
-        element.children[4].innerText = `${text}`
-    }
-
-
-
-
+let cardGenerator = (element, data, unit, text) => {
+    element.children[1].style.display = 'none'
+    element.children[2].style.display = 'none'
+    element.children[3].innerText = `${data} ${unit}`
+    element.children[4].innerText = `${text}`
 
 }
 
